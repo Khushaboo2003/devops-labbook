@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Calculate') {
+            steps {
+
+                script {
+
+                    int a = 10
+                    int b = 20
+                    int total = a + b
+
+                    echo "Total = ${total}"
+
+                }
+
+            }
+        }
+    }
+}
