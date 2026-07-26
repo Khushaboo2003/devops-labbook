@@ -1,0 +1,14 @@
+pipeline {
+    agent any
+    environment {
+      HOME = "/home/skynet"
+      ROOT_HOME = "/root"
+    }
+    stages {
+        stage('Hello') {
+            steps {
+                echo "Jenkins URL is - ${env.JENKINS_URL}"
+            }
+        }
+    }
+}
