@@ -1,0 +1,52 @@
+pipeline {
+    agent any
+
+    environment {
+        APP_DIR = "/tmp/demo-app"
+    }
+
+    stages {
+
+        stage('Build') {
+            steps {
+                echo "Creating application directory..."
+
+                sh """
+                    mkdir -p ${APP_DIR}
+                    echo "Hello from Jenkins Build Stage" > ${APP_DIR}/app.txt
+                    ls -l ${APP_DIR}
+                """
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo "Testing application..."
+
+                sh """
+                    if [ -f ${APP_DIR}/app.txt ]; then
+                        echo "Test Passed: app.txt exists"
+                        cat ${APP_DIR}/app.txt
+                    else
+                        echo "Test Failed!"
+                        exit 1
+                    fi
+                """
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo "Deploying application..."
+
+                sh """
+                    mkdir -p /tmp/deployment
+                    cp ${APP_DIR}/app.txt /tmp/deployment/
+                    echo "Deployment Successful!"
+                    ls -l /tmp/deployment
+                """
+            }
+        }
+    }
+
+   
