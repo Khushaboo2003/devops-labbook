@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Hello') {
+            steps {
+                script {
+                    def name = "khushi"
+                    def session = "jenkins"
+                    echo 'Student name is ${name}'
+                    echo "Student name is ${name}"
+                }
+            }
+        }
+    }
+}
